@@ -2,13 +2,13 @@ const userModel = require("../models/userModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
+let expireTime = Math.floor(3 * 3600)
 module.exports = {
-    registerUser: async (req, res) => {
-    const { password, email,username } = req.body;
+  registerUser: async (req, res) => {
+    const { password, email, username } = req.body;
 
     try {
-      const user = await userModel.createUser(password, email,username);
+      const user = await userModel.createUser(password, email, username);
       res.status(201).json({
         message: "User registered successfully",
         user,
@@ -29,38 +29,38 @@ module.exports = {
   },
   loginUser: async (req, res) => {
     const { password, email } = req.body;
-    
+
 
     try {
       const user = await userModel.getUserByEmail(email);
-      
+
       if (!user) {
         res.status(404).json({ message: "User not found" });
         return;
       }
 
       const passwordMatch = await bcrypt.compare(password + "", user.password);
-      
+
 
       if (!passwordMatch) {
         res.status(404).json({ message: "Username and password do not match" });
         return;
       }
       const { ACCESS_TOKEN_SECRET } = process.env;
-      /** generate a token */
+
       const accessToken = jwt.sign(
         { userid: user.id, email: user.email },
         ACCESS_TOKEN_SECRET,
         { expiresIn: "3h" }
       );
 
-      /** set the token in httpOnly cookie */
+
       res.cookie("token", accessToken, {
-        maxAge: 60* 60 *3* 1000,
+        maxAge: expireTime,
         httpOnly: true,
       });
 
-      /** response to client */
+
       res.status(200).json({
         message: "Login Successfully",
         user: { userid: user.id, email: user.email },
@@ -84,6 +84,52 @@ module.exports = {
       });
     }
   },
+
+  getUserById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await userModel.getUserById(id);
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(404).json({ message: "User not found." });
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return res.status(500).json({ message: "Server error. Please try again later." });
+    }
+  },
+  updateUserInfo: async (req, res) => {
+    const { id } = req.params;
+    const { username, email, password, bio, profilePic } = req.body;
+
+    try {
+
+      const user = await userModel.getUserById(id);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+
+
+      const updatedUser = {
+        username: username || user.username,
+        email: email || user.email,
+        password: password ? await hashPassword(password) : user.password,
+        bio: bio || user.bio,
+        profilePic: profilePic || user.profilePic
+      };
+
+
+      await userModel.updateUser(id, updatedUser);
+
+      return res.status(200).json({ message: "User updated successfully.", user: updatedUser });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      return res.status(500).json({ message: "Server error. Please try again later." });
+    }
+  },
+
   logoutUser: (req, res) => {
     res.clearCookie("token");
     req.cookies.token = null;
@@ -94,11 +140,11 @@ module.exports = {
     const { userid, email } = req.user;
     const { ACCESS_TOKEN_SECRET } = process.env;
     const newAccessToken = jwt.sign({ userid, email }, ACCESS_TOKEN_SECRET, {
-      expiresIn: "60s",
+      expiresIn: "3h",
     });
     res.cookie("token", newAccessToken, {
       httpOnly: true,
-      maxAge: 60* 60 *3* 1000,
+      maxAge: expireTime,
     });
 
     res.json({
@@ -106,6 +152,6 @@ module.exports = {
       user: { userid, email },
       token: newAccessToken,
     });
-  },  
+  },
 
 }

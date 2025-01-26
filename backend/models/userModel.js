@@ -28,25 +28,37 @@ module.exports = {
           throw error;
         }
       },
-      getUserByEmail: async (email) => {
-        try {
-          const user = await db("users")
-            .select("id", "email", "password")
-            .where({ email: email.toLowerCase() })
-            .first();
-          return user;
-        } catch (error) {
-          throw error;
-        }
-      },
-      getUsers: async () => {
-        try {
-          const users = await db("users").select("id", "email","username");
-          return users;
-        } catch (error) {
-          throw error;
-        }
-      },
+    getUserByEmail: async (email) => {
+      try {
+        const user = await db("users")
+          .select("id", "email", "password","profilepic","username","bio")
+          .where({ email: email.toLowerCase() })
+          .first();
+        return user;
+      } catch (error) {
+        throw error;
+      }
+    },
+    getUsers: async () => {
+      try {
+        const users = await db("users").select("id", "email", "password","profilepic","username","bio");
+        return users;
+      } catch (error) {
+        throw error;
+      }
+    },
+    getUserById: async (id) => {
+      try {
+        const user = await db("users")
+          .select("id", "email", "password","profilepic","username","bio")
+          .where({ id: id })
+          .first();
+        return user;
+      } catch (error) {
+        throw error;
+      }
+    },
+    
 
     
 }

@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Feed from "./components/Feed";
 import ProtectedRoute from "./components/ProtectedRoute";
-import UserProfile from "./components/UserProfile";
+import PersonalProfile from "./components/PersonalProfile";
+import EditProfile from "./components/EditProfile"
 import "./App.css";
 
 function App() {
@@ -20,10 +21,10 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route
-              path='/profile'
+              path='/profile/personal'
               element={
                 <ProtectedRoute>
-                  <UserProfile />
+                  <PersonalProfile />
                 </ProtectedRoute>
               }
             />
@@ -35,7 +36,17 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path='/update'
+              element={
+                <ProtectedRoute>
+                  <EditProfile />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
+          
+          
 
         </main>
 

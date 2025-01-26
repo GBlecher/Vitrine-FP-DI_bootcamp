@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = !!user && !!token;
 
-  console.log({
+  console.log("useAuth:",{
     isAuthenticated,
     user,
     token,

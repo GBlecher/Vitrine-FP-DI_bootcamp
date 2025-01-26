@@ -1,9 +1,9 @@
-import {PostsDisplay} from './PostsDisplay.jsx';
+import PostsDisplay from './PostsDisplay.jsx';
 const urlEndPoint = 'all'
 const Feed = ()=>{
     return(
         <>
-        <h1>FEED</h1>
+        <h1>Vitrine</h1>
         <PostsDisplay urlEndPoint={urlEndPoint}/>
         </>
     )

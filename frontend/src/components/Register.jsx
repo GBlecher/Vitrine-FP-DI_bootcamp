@@ -27,7 +27,7 @@ const Register = () => {
         { email, password },
         { withCredentials: true }
       );
-      // setError(message)
+      
       const { user, token ,message} = response.data;
       console.log({ user, token,message });
       setError(message)
@@ -45,7 +45,7 @@ const Register = () => {
           <input
             id='username'
             name='username'
-            type='username'
+            type='text'
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -73,6 +73,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+      
         <button type='submit'>Create Account</button>
         {error && <div className='error-message'>{error}</div>}
       </form>
