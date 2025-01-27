@@ -8,7 +8,10 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const PersonalProfile = () => {
   const { user } = useAuth();
   const [personalProfile, setPersonalProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  // const [loadingPosts, setLoadingPosts] = useState(true);
+  // const [posts, setPosts] = useState([]);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,21 +24,41 @@ const PersonalProfile = () => {
         setPersonalProfile(response.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
+        setError("Failed to load user profile.");
       } finally {
-        setLoading(false);
+        setLoadingProfile(false);
       }
     };
 
+    // const fetchPosts = async () => {
+    //   try {
+    //     const postsResponse = await axios.get(
+    //       `${apiBaseUrl}/api/post/${user.userid}`,
+    //       { withCredentials: true }
+    //     );
+
+    //     setPosts(postsResponse.data);
+    //   } catch (err) {
+    //     console.error("Error fetching posts:", err);
+    //     setError('Failed to fetch posts');
+    //   } finally {
+    //     setLoadingPosts(false);
+    //   }
+    // };
+
+    // fetchPosts();
     fetchPersonalProfile();
   }, [user.userid]);
 
-  if (loading) {
+  if (loadingProfile /*|| loadingPosts*/) {
     return <p>Loading profile...</p>;
   }
 
   if (!personalProfile) {
     return <p>User profile not found.</p>;
   }
+
+  if (error) return <div>{error}</div>;
 
   return (
     <>

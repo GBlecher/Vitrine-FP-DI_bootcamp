@@ -58,6 +58,23 @@ module.exports = {
         throw error;
       }
     },
+    updateUser: async (id, updates) => {
+      try {
+        
+        await db("users")
+          .where({ id: id })
+          .update(updates);
+
+          const updatedUser = await db("users")
+          .select("id", "email", "password", "profilepic", "username", "bio")
+          .where({ id: id })
+          .first();
+
+        return updatedUser;
+      } catch (error) {
+        throw error;
+      }
+    },
     
 
     

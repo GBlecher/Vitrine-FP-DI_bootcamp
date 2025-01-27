@@ -2,7 +2,7 @@ const userModel = require("../models/userModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-let expireTime = Math.floor(3 * 3600)
+let expireTime =  Math.floor(Date.now() / 1000) + (3 * 3600);
 module.exports = {
   registerUser: async (req, res) => {
     const { password, email, username } = req.body;
@@ -101,7 +101,7 @@ module.exports = {
   },
   updateUserInfo: async (req, res) => {
     const { id } = req.params;
-    const { username, email, password, bio, profilePic } = req.body;
+    const { username, email, password, bio, profilepic } = req.body;
 
     try {
 
@@ -115,15 +115,14 @@ module.exports = {
       const updatedUser = {
         username: username || user.username,
         email: email || user.email,
-        password: password ? await hashPassword(password) : user.password,
+        password: password ? await bcrypt.hash(password + "", 10) : user.password,
         bio: bio || user.bio,
-        profilePic: profilePic || user.profilePic
+        profilepic: profilepic || user.profilepic
       };
 
 
-      await userModel.updateUser(id, updatedUser);
-
-      return res.status(200).json({ message: "User updated successfully.", user: updatedUser });
+      const updatedUserData = await userModel.updateUser(id, updatedUser);
+      return res.status(200).json({ message: "User updated successfully.", user: updatedUserData });
     } catch (error) {
       console.error("Error updating user:", error);
       return res.status(500).json({ message: "Server error. Please try again later." });
