@@ -58,7 +58,7 @@ module.exports = {
         throw error;
       }
     },
-    updateUser: async (id, updates) => {
+    updateUserInfo: async (id, updates) => {
       try {
         
         await db("users")

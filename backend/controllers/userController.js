@@ -105,13 +105,6 @@ module.exports = {
 
     try {
 
-      const user = await userModel.getUserById(id);
-
-      if (!user) {
-        return res.status(404).json({ message: "User not found." });
-      }
-
-
       const updatedUser = {
         username: username || user.username,
         email: email || user.email,
@@ -120,8 +113,7 @@ module.exports = {
         profilepic: profilepic || user.profilepic
       };
 
-
-      const updatedUserData = await userModel.updateUser(id, updatedUser);
+      const updatedUserData = await userModel.updateUserInfo(id, updatedUser);
       return res.status(200).json({ message: "User updated successfully.", user: updatedUserData });
     } catch (error) {
       console.error("Error updating user:", error);

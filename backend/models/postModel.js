@@ -28,6 +28,24 @@ module.exports = {
       throw new Error("Could not fetch posts");
     }
   },
+  createPost: async ({ user_id, title, post_url, credit, hyperlink, tags }) => {
+    try {
+        
+        const [newPost] = await db("posts").insert({
+            user_id,
+            title,
+            post_url,
+            credit: credit || null, 
+            hyperlink: hyperlink || null,
+            created_at: new Date(), 
+            tags: tags || null,
+        }).returning("*"); 
 
+        return newPost; 
+    } catch (error) {
+        console.error("Error creating post:", error);
+        throw error; 
+    }
+},
 
 }

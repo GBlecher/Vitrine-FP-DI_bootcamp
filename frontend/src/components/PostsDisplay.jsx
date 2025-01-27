@@ -33,7 +33,7 @@ const PostsDisplay = ({urlEndPoint}) => {
     return (
         <div id='post_contaner'>
             {posts.map(post => (
-                <div key={post.user_id} className="post">
+                <div key={post.id} className="post">
                     <img src={post.post_url} alt={`Post by user ${post.user_id}`} style={{ width: '100%', height: 'auto' }} />
                 </div>
             ))}

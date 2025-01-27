@@ -2,9 +2,14 @@
   --primary-color: #007bff;
   --error-color: #dc3545;
   --success-color: #28a745;
+  width: 100%
 }
 
+body{
+  border: 2px solid black;
+}
 .container {
+  
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
