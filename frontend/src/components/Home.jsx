@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <>
       <div className="auth-form-container">
@@ -9,8 +9,8 @@ const Home = () => {
         <br />
         <br />
         <div className="auth-form">
-          <button onClick={() => navigate('/login')}>Login</button>
-          <button onClick={() => navigate('/register')}>Register</button>
+          <button onClick={() => navigate("/login")}>Login</button>
+          <button onClick={() => navigate("/register")}>Register</button>
         </div>
       </div>
     </>

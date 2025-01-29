@@ -11,13 +11,12 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <div className='loading'>Loading</div>;
-  }
-  
-  if (!isAuthenticated) {
-    return <Navigate to='/login' state={{ from: location }} replace />;
+    return <div className="loading">Loading</div>;
   }
 
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   return children;
 };

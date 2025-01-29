@@ -6,41 +6,36 @@ import { useNavigate } from "react-router-dom";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const EditProfile = () => {
-  
   const { user } = useAuth();
-  const [profilepic, setProfilepic] = useState(user.profilepic );
+  const [profilepic, setProfilepic] = useState(user.profilepic);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password);
   const [username, setUsername] = useState(user.username);
-  const [bio, setBio] = useState(user.bio );
+  const [bio, setBio] = useState(user.bio);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     setError("");
     console.log("handle submit:", user.userid);
-    
+
     try {
       const response = await axios.put(
         `${apiBaseUrl}/api/user/${user.userid}`,
         { email, password, username, bio, profilepic },
         { withCredentials: true }
       );
-      console.log("updated user:",response.data);
-      
-      // const { user, token, message } = response.data;
-      // console.log({ user, token, message });
-      // setError(message);
+      console.log("updated user:", response.data);
+
       navigate("/profile/personal");
     } catch (err) {
       setError(err.response?.data?.message || "Update failed");
-      console.log("Update ERR:",err);
-      
+      console.log("Update ERR:", err);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -49,7 +44,6 @@ const EditProfile = () => {
       <h2>Profile Info</h2>
       <p>*All fields are optional</p>
       <form className="auth-form" onSubmit={handleSubmit}>
-
         <div className="form-group">
           <label htmlFor="profilepic">Profile Picture URL</label>
           {profilepic && (

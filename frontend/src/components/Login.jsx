@@ -23,42 +23,42 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-      const { user, token ,message} = response.data;
-      console.log({ user, token,message });
-      login(user, token,message);
+      const { user, token, message } = response.data;
+      console.log({ user, token, message });
+      login(user, token, message);
       navigate("/feed");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
   };
   return (
-    <div className='auth-form-container'>
+    <div className="auth-form-container">
       <h2>Login</h2>
-      <form className='auth-form' onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
           <input
-            id='email'
-            name='email'
-            type='email'
+            id="email"
+            name="email"
+            type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
-            id='password'
-            name='password'
-            type='password'
+            id="password"
+            name="password"
+            type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type='submit'>Login</button>
-        {error && <div className='error-message'>{error}</div>}
+        <button type="submit">Login</button>
+        {error && <div className="error-message">{error}</div>}
       </form>
     </div>
   );

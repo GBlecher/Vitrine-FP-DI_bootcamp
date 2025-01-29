@@ -76,13 +76,12 @@ const PostsDisplay = () => {
   if (error) return <div>{error}</div>;
 
   return (
-  
-      <article id ="feed_container">
+    <article id="feed_container">
       <div id="searchBar">
         <input
           type="text"
           value={searchedUser}
-          onChange={(e) => setSearchedUser((e.target.value))}
+          onChange={(e) => setSearchedUser(e.target.value)}
           placeholder="Search for username..."
         />
         <button onClick={handleX}>X</button>

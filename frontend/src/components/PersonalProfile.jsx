@@ -1,12 +1,11 @@
-
-import  PrivProfileInfo  from "./PrivProfileInfo.jsx";
+import PrivProfileInfo from "./PrivProfileInfo.jsx";
 import PrivFeed from "./PrivFeed.jsx";
 
 const PersonalProfile = () => {
   return (
     <>
       <PrivProfileInfo />
-      <hr/>
+      <hr />
       <br />
 
       <PrivFeed />

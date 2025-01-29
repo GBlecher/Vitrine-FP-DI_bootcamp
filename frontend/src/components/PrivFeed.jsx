@@ -87,7 +87,12 @@ const PrivFeed = () => {
             {hoveredPostId === post.id && (
               <h3
                 onClick={() => setDeletePostId(post.id)}
-                style={{ position: "absolute", bottom: "50px", right: "10px",cursor: "pointer", }}
+                style={{
+                  position: "absolute",
+                  bottom: "50px",
+                  right: "10px",
+                  cursor: "pointer",
+                }}
                 className="options_button"
               >
                 ...

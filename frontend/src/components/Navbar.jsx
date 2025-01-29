@@ -2,15 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../auth/useAuth.jsx";
 
-
-
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { logout, isAuthenticated, user } = useAuth();
- console.log('user in navbar:',user);
- 
+  console.log("user in navbar:", user);
+
   const handleLogout = async () => {
     try {
       await axios.post(
@@ -27,7 +25,6 @@ const Navbar = () => {
   return (
     <nav>
       <div style={{ display: "flex", gap: "10px" }}>
-      
         {!isAuthenticated && (
           <>
             <Link to={"/"}>Home</Link>

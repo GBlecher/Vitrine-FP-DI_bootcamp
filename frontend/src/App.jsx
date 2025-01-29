@@ -5,25 +5,23 @@ import Register from "./components/Register";
 import Feed from "./components/Feed";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PersonalProfile from "./components/PersonalProfile";
-import EditProfile from "./components/EditProfile"
-import CreatePost from "./components/CreatePost"
+import EditProfile from "./components/EditProfile";
+import CreatePost from "./components/CreatePost";
 import Home from "./components/Home";
 import "./App.css";
 
 function App() {
- 
-
   return (
     <>
       <div className="app">
-        <Navbar/>
+        <Navbar />
         <main className="container">
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route
-              path='/profile/personal'
+              path="/profile/personal"
               element={
                 <ProtectedRoute>
                   <PersonalProfile />
@@ -31,7 +29,7 @@ function App() {
               }
             />
             <Route
-              path='/feed'
+              path="/feed"
               element={
                 <ProtectedRoute>
                   <Feed />
@@ -39,7 +37,7 @@ function App() {
               }
             />
             <Route
-              path='/update'
+              path="/update"
               element={
                 <ProtectedRoute>
                   <EditProfile />
@@ -47,7 +45,7 @@ function App() {
               }
             />
             <Route
-              path='/profile/personal/newpost'
+              path="/profile/personal/newpost"
               element={
                 <ProtectedRoute>
                   <CreatePost />
@@ -55,14 +53,10 @@ function App() {
               }
             />
           </Routes>
-          
-          
-
         </main>
-
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
