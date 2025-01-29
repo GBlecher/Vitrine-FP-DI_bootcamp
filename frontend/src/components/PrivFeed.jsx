@@ -25,7 +25,7 @@ const PrivFeed = () => {
         setPosts(postsResponse.data);
       } catch (err) {
         console.error("Error fetching posts:", err);
-        setError('Failed to fetch posts');
+        setError("Failed to fetch posts");
       } finally {
         setLoadingPosts(false);
       }
@@ -36,9 +36,11 @@ const PrivFeed = () => {
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`${apiBaseUrl}/api/post/${postId}`, { withCredentials: true });
-      setPosts(posts.filter(post => post.id !== postId)); 
-      setDeletePostId(null); 
+      await axios.delete(`${apiBaseUrl}/api/post/${postId}`, {
+        withCredentials: true,
+      });
+      setPosts(posts.filter((post) => post.id !== postId));
+      setDeletePostId(null);
     } catch (err) {
       setError("Failed to delete post");
       console.error(err);
@@ -50,44 +52,58 @@ const PrivFeed = () => {
   }
 
   if (posts.length === 0) {
-    return <p>No posts found.</p>;
+    return (
+      <>
+        <button onClick={() => navigate("/profile/personal/newpost")}>
+          Create Post
+        </button>
+        <p>No posts found.</p>
+      </>
+    );
   }
 
   if (error) return <div>{error}</div>;
 
   return (
     <>
-      <button onClick={() => navigate("/profile/personal/newpost")}>Create Post</button>
+      <button onClick={() => navigate("/profile/personal/newpost")}>
+        Create Post
+      </button>
+
       <div id="post_container">
         {posts.map((post) => (
           <div
             key={post.id}
             className="post"
-            style={{ position: 'relative' }}
-            onMouseEnter={() => setHoveredPostId(post.id)} 
-            onMouseLeave={() => setHoveredPostId(null)} 
+            style={{ position: "relative" }}
+            onMouseEnter={() => setHoveredPostId(post.id)}
+            onMouseLeave={() => setHoveredPostId(null)}
           >
             <img
               src={post.post_url}
               alt={`Post by user ${post.user_id}`}
               style={{ width: "100%", height: "auto" }}
             />
-            <h3>{post.title}</h3>
-            {hoveredPostId === post.id && ( 
+            {hoveredPostId === post.id && (
               <h3
                 onClick={() => setDeletePostId(post.id)}
-                style={{ position: 'absolute', bottom: '10px', right: '10px' }}
+                style={{ position: "absolute", bottom: "50px", right: "10px",cursor: "pointer", }}
                 className="options_button"
               >
                 ...
               </h3>
             )}
             {deletePostId === post.id && (
-              <div  className='options_menu' style={{ position: 'absolute', bottom: '40px', right: '10px' }}>
-                <button   onClick={() => handleDelete(post.id)}>Delete</button>
-                <button  onClick={() => setDeletePostId(null)}>Cancel</button>
+              <div
+                className="options_menu"
+                style={{ position: "absolute", bottom: "40px", right: "10px" }}
+              >
+                <button onClick={() => handleDelete(post.id)}>Delete</button>
+                <button onClick={() => setDeletePostId(null)}>Cancel</button>
               </div>
             )}
+
+            <h3>{post.title}</h3>
           </div>
         ))}
       </div>

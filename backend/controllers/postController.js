@@ -50,7 +50,7 @@ module.exports = {
       deletePostById: async (req, res) => {
           const { id } = req.params; 
           try {
-            const result = await userModel.deletePostById(id);
+            const result = await postModel.deletePostById(id);
             if (result) {
               return res.status(204).send(); 
             }

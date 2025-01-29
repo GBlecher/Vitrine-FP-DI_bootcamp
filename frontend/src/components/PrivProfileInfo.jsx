@@ -46,12 +46,12 @@ const PrivProfileInfo = () => {
   return (
     <>
       <div className="account_info">
-        <img src={privProfileInfo.profilepic} alt="Account profile picture" />
+        <img src={privProfileInfo.profilepic} alt="Account profile picture" onClick={() => navigate("/update")}/>
         <h1>{`${privProfileInfo.username}`}</h1>
         {privProfileInfo.bio && <p>{privProfileInfo.bio}</p>}
-        <button onClick={() => navigate("/update")}>
+        {/* <button >
           Update Account information
-        </button>
+        </button> */}
       </div>
 
       

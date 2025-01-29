@@ -20,7 +20,10 @@ const CreatePost = () => {
     setLoading(true);
     setError("");
     const user_id = user.userid;
-    const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag);
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag);
 
     try {
       const newPost = await axios.post(
@@ -39,6 +42,15 @@ const CreatePost = () => {
   return (
     <div className="auth-form-container">
       <h2>Create Post</h2>
+      {post_url && (
+        <div>
+          <img
+            src={post_url}
+            alt="post Preview"
+            style={{ width: "200px", height: "200px", objectFit: "cover" }}
+          />
+        </div>
+      )}
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="post_url">Post URL</label>
@@ -49,6 +61,7 @@ const CreatePost = () => {
             required
             value={post_url}
             onChange={(e) => setPost_url(e.target.value)}
+            placeholder="Enter image URL..."
           />
         </div>
         <div className="form-group">
@@ -60,6 +73,7 @@ const CreatePost = () => {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter post title..."
           />
         </div>
         <div className="form-group">
@@ -70,6 +84,7 @@ const CreatePost = () => {
             type="credit"
             value={credit}
             onChange={(e) => setCredit(e.target.value)}
+            placeholder="Enter credits if applicable..."
           />
         </div>
         <div className="form-group">
@@ -78,9 +93,9 @@ const CreatePost = () => {
             id="hyperlink"
             name="hyperlink"
             type="hyperlink"
-            
             value={hyperlink}
             onChange={(e) => setHyperlink(e.target.value)}
+            placeholder="Enter link to page if applicable"
           />
         </div>
         <div className="form-group">
@@ -91,6 +106,7 @@ const CreatePost = () => {
             type="tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
+            placeholder=" enter tags seperated by ','"
           />
         </div>
 

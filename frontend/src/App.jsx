@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PersonalProfile from "./components/PersonalProfile";
 import EditProfile from "./components/EditProfile"
 import CreatePost from "./components/CreatePost"
+import Home from "./components/Home";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Navbar/>
         <main className="container">
           <Routes>
-            <Route path='/' element={<h2>WELCOME TO VITRINE!</h2>} />
+            <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route

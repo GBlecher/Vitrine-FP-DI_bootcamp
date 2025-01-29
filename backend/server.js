@@ -3,9 +3,10 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 
+
 const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
-// const { db } = require("./config/db.js");
+
 
 const { PORT } = process.env;
 app.listen(PORT || 5001, () => {

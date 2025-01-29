@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
     initAuth();
-  }, []);// HERE IS WHERE I PUT refreshAuth
+  }, []);
 
   const isAuthenticated = !!user && !!token;
 
