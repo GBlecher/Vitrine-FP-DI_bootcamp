@@ -10,4 +10,5 @@ router.get("/auth", verifyToken, userController.verifyAuth);
 router.get("/:id", verifyToken, userController.getUserById);
 router.post("/logout", userController.logoutUser);
 router.put("/:id", verifyToken, userController.updateUserInfo);
+router.delete('/:id', verifyToken,userController.deleteUser)
 module.exports = router;

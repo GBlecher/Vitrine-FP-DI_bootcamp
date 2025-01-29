@@ -75,7 +75,19 @@ module.exports = {
         throw error;
       }
     },
+    deleteUserById: async (id) => {
+      try {
+          const result = await db('users')
+              .where({ id })
+              .del(); 
+          
+          return result; 
+      } catch (error) {
+          console.error("Error in model deleteUserById:", error);
+          throw error; 
+      }
+  },
+};
     
 
     
-}

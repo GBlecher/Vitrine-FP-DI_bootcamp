@@ -6,6 +6,7 @@ import Feed from "./components/Feed";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PersonalProfile from "./components/PersonalProfile";
 import EditProfile from "./components/EditProfile"
+import CreatePost from "./components/CreatePost"
 import "./App.css";
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <EditProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/profile/personal/newpost'
+              element={
+                <ProtectedRoute>
+                  <CreatePost />
                 </ProtectedRoute>
               }
             />

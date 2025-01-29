@@ -7,5 +7,7 @@ const router = Router();
 router.get("/all", verifyToken, postController.getAllPosts);
 router.get("/:user_id", verifyToken, postController.getPostsById);
 router.post("/new/:user_id", verifyToken, postController.createPost)
+router.delete('/:id', verifyToken,postController.deletePostById)
+
 // router.get("/auth", verifyToken, postController.verifyAuth);
 module.exports = router;

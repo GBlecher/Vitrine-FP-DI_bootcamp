@@ -2,15 +2,17 @@
   --primary-color: #007bff;
   --error-color: #dc3545;
   --success-color: #28a745;
-  width: 100%
+  
 }
 
-body{
-  border: 2px solid black;
+html, body{
+  width: 100%;  
+  margin: 0;    
+  padding: 0;   
 }
 .container {
-  
-  max-width: 1200px;
+  /* max-width: 100%; */
+  width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -70,8 +72,57 @@ button:hover {
   opacity: 0.9;
 }
 
-#post_contaner{
-  border: 1px solid black;
+#post_container{
+
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; 
+  gap: 16px;
+}
+.post{
+  border-radius: 10px;
+  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    overflow: hidden; 
+    width: 230px;
+    height: fit-content;
+    position: relative; 
+    transition: transform 0.2s;
+}
+.post:hover {
+ 
+  filter: brightness(0.8)
+}
+
+
+.post img {
+  border-radius: 10px;
+  width: 230px; 
+  max-height: 300px ;
+  overflow: hidden;
+
+}
+.post h3{
+  margin: 1px 5px;
+}
+.account_info img{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.options_menu{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+}
+.options_menu button{
+  background-color: white;
+  color: black;
+  padding: 0;
+}
+.options_button{
+  background-color: transparent;
 }

@@ -29,10 +29,12 @@ const EditProfile = () => {
         { email, password, username, bio, profilepic },
         { withCredentials: true }
       );
-      const { user, token, message } = response.data;
-      console.log({ user, token, message });
-      setError(message);
-      navigate("/personal");
+      console.log("updated user:",response.data);
+      
+      // const { user, token, message } = response.data;
+      // console.log({ user, token, message });
+      // setError(message);
+      navigate("/profile/personal");
     } catch (err) {
       setError(err.response?.data?.message || "Update failed");
       console.log("Update ERR:",err);
@@ -45,7 +47,7 @@ const EditProfile = () => {
   return (
     <div className="auth-form-container">
       <h2>Profile Info</h2>
-      <h3>All fields are opptional</h3>
+      <p>*All fields are optional</p>
       <form className="auth-form" onSubmit={handleSubmit}>
 
         <div className="form-group">

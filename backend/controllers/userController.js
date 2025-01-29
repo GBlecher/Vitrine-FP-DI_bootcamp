@@ -2,7 +2,7 @@ const userModel = require("../models/userModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-let expireTime =  Math.floor(Date.now() / 1000) + (3 * 3600);
+let expireTime = Math.floor(Date.now() / 1000) + (3 * 3600);
 module.exports = {
   registerUser: async (req, res) => {
     const { password, email, username } = req.body;
@@ -104,7 +104,7 @@ module.exports = {
     const { username, email, password, bio, profilepic } = req.body;
 
     try {
-
+      const user = await userModel.getUserById(id);
       const updatedUser = {
         username: username || user.username,
         email: email || user.email,
@@ -117,6 +117,19 @@ module.exports = {
       return res.status(200).json({ message: "User updated successfully.", user: updatedUserData });
     } catch (error) {
       console.error("Error updating user:", error);
+      return res.status(500).json({ message: "Server error. Please try again later." });
+    }
+  },
+  deleteUser: async (req, res) => {
+    const { id } = req.params; 
+    try {
+      const result = await userModel.deleteUserById(id);
+      if (result) {
+        return res.status(204).send(); 
+      }
+      return res.status(404).json({ message: "User not found." });
+    } catch (error) {
+      console.error("Error deleting user:", error);
       return res.status(500).json({ message: "Server error. Please try again later." });
     }
   },
