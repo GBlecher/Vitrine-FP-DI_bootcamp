@@ -8,11 +8,11 @@ const app = express();
 const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html')); 
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html')); 
+// });
 const { PORT } = process.env;
 app.listen(PORT || 5001, () => {
   console.log(`run on ${PORT || 5001}`);
