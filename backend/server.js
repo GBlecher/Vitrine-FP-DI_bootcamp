@@ -8,7 +8,7 @@ const app = express();
 const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
@@ -26,7 +26,6 @@ app.use(
     origin: ['http://localhost:5173']
   })
 );
-
 
 
 app.use("/api/user", userRouter);
