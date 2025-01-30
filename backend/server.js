@@ -8,13 +8,12 @@ const app = express();
 const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
-if (process.env.SERVE_FRONTEND === 'true') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html')); 
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html')); 
   });
-}
 
 
 const { PORT } = process.env;
