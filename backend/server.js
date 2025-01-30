@@ -9,10 +9,10 @@ const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
 
-  app.use(express.static(path.join(__dirname, '../frontend')));
+  app.use(express.static(path.join(__dirname, '../frontend/src')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend', 'index.html')); 
+    res.sendFile(path.join(__dirname, '../frontend/src', 'index.html')); 
   });
 
 
