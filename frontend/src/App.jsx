@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Feed from "./components/Feed";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PersonalProfile from "./components/PersonalProfile";
-import EditProfile from "./components/EditProfile";
-import CreatePost from "./components/CreatePost";
-import Home from "./components/Home";
+import Navbar from "./components/publicApp/Navbar";
+import Login from "./components/publicApp/Login";
+import Register from "./components/publicApp/Register";
+import Feed from "./components/publicApp/Feed";
+import ProtectedRoute from "./components/publicApp/ProtectedRoute";
+import PersonalProfile from "./components/privateProfile/PersonalProfile";
+import EditProfile from "./components/privateProfile/EditProfile";
+import CreatePost from "./components/privateProfile/CreatePost";
+import Home from "./components/publicApp/Home";
 import "./App.css";
 
 function App() {

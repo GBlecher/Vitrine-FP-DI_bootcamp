@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useAuth } from "../auth/useAuth.jsx";
+import { useAuth } from "../../auth/useAuth.jsx";
 
 import { useNavigate } from "react-router-dom";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -15,7 +15,7 @@ const EditProfile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -23,6 +23,7 @@ const EditProfile = () => {
     console.log("handle submit:", user.userid);
 
     try {
+      // Update user information via API
       const response = await axios.put(
         `${apiBaseUrl}/api/user/${user.userid}`,
         { email, password, username, bio, profilepic },

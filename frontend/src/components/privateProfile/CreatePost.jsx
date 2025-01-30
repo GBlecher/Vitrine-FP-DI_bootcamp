@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useAuth } from "../auth/useAuth.jsx";
+import { useAuth } from "../../auth/useAuth";
 import { useNavigate } from "react-router-dom";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 

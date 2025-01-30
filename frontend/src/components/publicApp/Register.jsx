@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/useAuth";
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Register = () => {
@@ -8,30 +10,38 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
 
   const navigate = useNavigate();
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      await axios.post(
+      // Send a POST request to register the user
+      const registerResponse =await axios.post(
         `${apiBaseUrl}/api/user/register`,
         { email, password, username },
         { withCredentials: true }
       );
-
-      const response = await axios.post(
+      console.log("Registration response:", registerResponse.data);
+      // Send a POST request to log in the user
+      
+      const loginResponse  = await axios.post(
         `${apiBaseUrl}/api/user/login`,
         { email, password },
         { withCredentials: true }
       );
+      console.log("Login response:", loginResponse.data);
+      
 
-      const { user, token, message } = response.data;
+      const { user, token, message } = loginResponse .data;
       console.log({ user, token, message });
+      // Call the login function with the retrieved user and token
+      login(user, token, message);
       setError(message);
-      navigate("/feed");
+      navigate("/update");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }

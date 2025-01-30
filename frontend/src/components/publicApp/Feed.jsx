@@ -4,7 +4,7 @@ const urlEndPoint = "all";
 const Feed = () => {
   return (
     <>
-      <h1>Vitrine</h1>
+      <h1 id="logo">Vitrine</h1>
       <PostsDisplay urlEndPoint={urlEndPoint} />
     </>
   );

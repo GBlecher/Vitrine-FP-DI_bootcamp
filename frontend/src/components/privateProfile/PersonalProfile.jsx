@@ -7,7 +7,6 @@ const PersonalProfile = () => {
       <PrivProfileInfo />
       <hr />
       <br />
-
       <PrivFeed />
     </>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/useAuth.jsx";
+import { useAuth } from "../../auth/useAuth.jsx";
 import axios from "axios";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -14,7 +14,7 @@ const PrivProfileInfo = () => {
 
   useEffect(() => {
     console.log(user);
-
+    //Retrieve logged in ussers information
     const fetchPrivProfileInfo = async () => {
       try {
         const response = await axios.get(

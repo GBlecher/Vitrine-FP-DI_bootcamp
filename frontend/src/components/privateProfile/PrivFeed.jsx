@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/useAuth.jsx";
+import { useAuth } from "../../auth/useAuth.jsx";
 import axios from "axios";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -14,6 +14,7 @@ const PrivFeed = () => {
   const [hoveredPostId, setHoveredPostId] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch posts for the current user
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -34,12 +35,13 @@ const PrivFeed = () => {
     fetchPosts();
   }, [user.userid]);
 
+    // Handle post deletion
   const handleDelete = async (postId) => {
     try {
       await axios.delete(`${apiBaseUrl}/api/post/${postId}`, {
         withCredentials: true,
       });
-      setPosts(posts.filter((post) => post.id !== postId));
+      setPosts(posts.filter((post) => post.id !== postId));// Filter out unwanted post
       setDeletePostId(null);
     } catch (err) {
       setError("Failed to delete post");

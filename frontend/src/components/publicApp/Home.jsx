@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <div className="auth-form-container">
-        <h2>WELCOME TO VITRINE!</h2>
+        <h2 >WELCOME TO VITRINE!</h2>
         <br />
         <br />
         <div className="auth-form">

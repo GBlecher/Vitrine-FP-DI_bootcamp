@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/useAuth";
+import { useAuth } from "../../auth/useAuth";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,12 +12,13 @@ const Login = () => {
   const { login } = useAuth();
 
   const navigate = useNavigate();
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
+      // Send a POST request to log in the user
       const response = await axios.post(
         `${apiBaseUrl}/api/user/login`,
         { email, password },

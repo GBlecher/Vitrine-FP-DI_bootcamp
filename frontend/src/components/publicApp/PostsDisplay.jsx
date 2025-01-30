@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../popUp.css";
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PostsDisplay = () => {
@@ -12,20 +12,23 @@ const PostsDisplay = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
 
+  // Handle search for a user
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
+      // Fetch all users to find the searched username
       const usersResponse = await axios.get(`${apiBaseUrl}/api/user/all`, {
         withCredentials: true,
       });
-
+      // Find the user object that matches the searched username
       const foundUser = usersResponse.data.find(
         (user) => user.username.toLowerCase() === searchedUser.toLowerCase()
       );
       if (foundUser) {
+        // If user is found, update urlEndPoint with the user's ID
         setUrlEndPoint(foundUser.id);
       } else {
         setError("User not found");
@@ -37,10 +40,12 @@ const PostsDisplay = () => {
       setLoading(false);
     }
   };
+  // Handle resetting the search (clear search input)
   const handleX = () => {
     setUrlEndPoint("all");
   };
 
+  // Fetch posts when the component mounts or urlEndPoint changes
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -50,7 +55,7 @@ const PostsDisplay = () => {
         );
         console.log(postsResponse.data);
 
-        setPosts(postsResponse.data);
+        setPosts(postsResponse.data);// Update state with the fetched posts
       } catch (err) {
         setError("Failed to fetch posts");
         console.error(err);
@@ -62,11 +67,12 @@ const PostsDisplay = () => {
     fetchPosts();
   }, [urlEndPoint]);
 
+  // Open the popup for the selected post
   const openPopup = (post) => {
     setSelectedPost(post);
     setPopupVisible(true);
   };
-
+  // Close the popup
   const closePopup = () => {
     setPopupVisible(false);
     setSelectedPost(null);
@@ -99,7 +105,7 @@ const PostsDisplay = () => {
           </div>
         ))}
       </div>
-
+        {/* render pop up */}
       {popupVisible && selectedPost && (
         <div className="popup">
           <div className="popup-content">
@@ -120,7 +126,7 @@ const PostsDisplay = () => {
                       window.open(selectedPost.hyperlink, "_blank")
                     }
                   >
-                    Go to Post
+                    Find Me
                   </button>
                 )}
                 {selectedPost.credit && <p>Credits: {selectedPost.credit}</p>}

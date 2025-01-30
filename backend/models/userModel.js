@@ -4,19 +4,21 @@ const bcrypt = require('bcrypt')
 
 
 module.exports = {
+    // Create a new user with hashed password
     createUser: async (password, email,username ) => {
-        const trx = await db.transaction();
+        const trx = await db.transaction();// Start a database transaction
         try {
           
           const hashPassword = await bcrypt.hash(password + "", 10);
-    
+          
+          // Insert new user into the database and return specific fields
           const [user] = await trx("users").insert(
             {
               email: email.toLowerCase(),
               password: hashPassword,
               username: username,
             },
-            ["username","email", "id"]
+            ["username","email", "id"]// Return these fields from the insert
           );
     
           await trx.commit();
@@ -28,6 +30,7 @@ module.exports = {
           throw error;
         }
       },
+      // Retrieve a user by their email address
     getUserByEmail: async (email) => {
       try {
         const user = await db("users")
@@ -39,6 +42,7 @@ module.exports = {
         throw error;
       }
     },
+    // Retrieve all users from the database
     getUsers: async () => {
       try {
         const users = await db("users").select("id", "email", "password","profilepic","username","bio");
@@ -47,6 +51,7 @@ module.exports = {
         throw error;
       }
     },
+    // Retrieve a user by their ID
     getUserById: async (id) => {
       try {
         const user = await db("users")
@@ -58,13 +63,14 @@ module.exports = {
         throw error;
       }
     },
+    // Update a user's information
     updateUserInfo: async (id, updates) => {
       try {
         
         await db("users")
           .where({ id: id })
           .update(updates);
-
+          // Retrieve updated user data from the database
           const updatedUser = await db("users")
           .select("id", "email", "password", "profilepic", "username", "bio")
           .where({ id: id })
@@ -75,6 +81,7 @@ module.exports = {
         throw error;
       }
     },
+    // Delete a user by their ID
     deleteUserById: async (id) => {
       try {
           const result = await db('users')
