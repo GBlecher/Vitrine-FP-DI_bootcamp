@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "start": "cd ../backend && npm i && node server.js"
+    "dev": "vite",                             // For development
+    "build": "vite build",                     // Build for production
+    "preview": "vite preview"  
     
     
   },
