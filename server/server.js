@@ -9,11 +9,11 @@ const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
 
-  app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend', 'index.html')); 
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/dist/index.html'));
+});
 
 
 const { PORT } = process.env;
