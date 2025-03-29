@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -59,6 +59,7 @@ const Register = () => {
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="off"
           />
         </div>
         <div className="form-group">
@@ -70,6 +71,7 @@ const Register = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="off"
           />
         </div>
         <div className="form-group">
@@ -81,11 +83,13 @@ const Register = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="off"
           />
         </div>
 
         <button type="submit">Create Account</button>
         {error && <div className="error-message">{error}</div>}
+        <p>Already have an account? <Link to="/Login">Log in</Link></p>
       </form>
     </div>
   );

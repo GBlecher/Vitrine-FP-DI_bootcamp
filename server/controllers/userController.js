@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 let expireTime = Math.floor(Date.now() / 1000) + (3 * 3600);
 module.exports = {
-  //register a new user
+    
   registerUser: async (req, res) => {
     const { password, email, username } = req.body;
 
@@ -165,4 +165,4 @@ module.exports = {
     });
   },
 
-}
+} 
