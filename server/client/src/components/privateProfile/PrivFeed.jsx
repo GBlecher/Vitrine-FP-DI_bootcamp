@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth.jsx";
 import axios from "axios";
 
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PrivFeed = () => {
@@ -68,11 +69,10 @@ const PrivFeed = () => {
 
   return (
     <>
-      <button onClick={() => navigate("/profile/personal/newpost")}>
-        Create Post
-      </button>
+      
 
       <div id="post_container">
+      
         {posts.map((post) => (
           <div
             key={post.id}
@@ -113,7 +113,9 @@ const PrivFeed = () => {
             <h3>{post.title}</h3>
           </div>
         ))}
+        
       </div>
+      
     </>
   );
 };

@@ -7,7 +7,7 @@ import { useAuth } from "../../auth/useAuth";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
@@ -22,7 +22,7 @@ const Login = () => {
       // Send a POST request to log in the user
       const response = await axios.post(
         `${apiBaseUrl}/api/user/login`,
-        { email, password },
+        { identifier, password },
         { withCredentials: true }
       );
       const { user, token, message } = response.data;
@@ -38,14 +38,14 @@ const Login = () => {
       <h2>Login</h2>
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="identifier">Email or Username</label>
           <input
-            id="email"
-            name="email"
-            type="email"
+            id="identifier"
+            name="identifier"
+            type="text"
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
           />
         </div>
         <div className="form-group">

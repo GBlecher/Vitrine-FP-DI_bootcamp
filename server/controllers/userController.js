@@ -30,11 +30,12 @@ module.exports = {
   },
    // Log in a user
   loginUser: async (req, res) => {
-    const { password, email } = req.body;
+    const { password, identifier  } = req.body;
 
 
     try {
-      const user = await userModel.getUserByEmail(email);// Fetch user by email
+      const isEmail = identifier.includes('@');// checks if email or username
+      const user = await userModel.getUserByIdentifier(identifier, isEmail);// Fetch user by email
 
       if (!user) {
         res.status(404).json({ message: "User not found" });
@@ -51,7 +52,8 @@ module.exports = {
       const { ACCESS_TOKEN_SECRET } = process.env;
 
       const accessToken = jwt.sign(
-        { userid: user.id, email: user.email },
+        { userid: user.id, email: user.email, username : user.username
+         },
         ACCESS_TOKEN_SECRET,
         { expiresIn: "3h" }
       );
@@ -65,7 +67,7 @@ module.exports = {
 
       res.status(200).json({
         message: "Login Successfully",
-        user: { userid: user.id, email: user.email },
+        user: { userid: user.id, email: user.email , username : user.username },
         token: accessToken,
       });
     } catch (error) {

@@ -53,6 +53,13 @@ const PrivProfileInfo = () => {
         />
         <h1>{`${privProfileInfo.username}`}</h1>
         {privProfileInfo.bio && <p>{privProfileInfo.bio}</p>}
+
+        <button onClick={() => navigate("/update")}>
+        Edit Profile
+      </button>
+      <button onClick={() => navigate("/profile/personal/newpost")}>
+        Create Post
+      </button>
       </div>
     </>
   );

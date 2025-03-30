@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PostsDisplay = () => {
@@ -81,8 +82,12 @@ const PostsDisplay = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
+
+
   return (
+    
     <article id="feed_container">
+      
       <div id="searchBar">
         <input
           type="text"
@@ -140,6 +145,7 @@ const PostsDisplay = () => {
         </div>
       )}
     </article>
+    
   );
 };
 

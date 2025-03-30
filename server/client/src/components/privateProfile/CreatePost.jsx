@@ -106,7 +106,7 @@ const CreatePost = () => {
             type="tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder=" enter tags seperated by ','"
+            placeholder=" Enter tags seperated by ','"
           />
         </div>
 
@@ -120,3 +120,4 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
